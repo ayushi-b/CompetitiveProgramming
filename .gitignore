@@ -4,3 +4,4 @@
 template.cpp
 CMakeLists.txt
 **/DEC17
+.gitignore
