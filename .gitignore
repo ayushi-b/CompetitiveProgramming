@@ -1,0 +1,6 @@
+.idea/
+**/.DS_Store
+**/cmake-build-debug
+template.cpp
+CMakeLists.txt
+**/DEC17
