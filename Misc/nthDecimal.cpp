@@ -3,9 +3,13 @@
 PROBLEM STATEMENT
 
 Bosky often helps his younger brother Nitin with his home work and also clears his doubts.
-Today, Nitin learned about proper fractions. He went a step forward and tried to represent the same proper fraction in its decimal form, but runs into problems. He now seeks help from his brother Bosky.
-Nitin is a very sincere learner, thus he wants his brother to help him but doesn't want him to completely solve the problem. He goes to his brother Bosky and asks him to help him wherever he gets stuck while representing the proper fraction in decimal expansion by telling the next digit in the decimal expansion.
-Though Bosky is a bit busy today with his school project, he doesn't want to disappoint his brother. He is familiar with your brilliant programming skills and asks you to create a program to help his brother, which can output Rth digit in the decimal expansion for a given proper fraction N/D
+Today, Nitin learned about proper fractions. He went a step forward and tried to represent the same proper fraction in
+its decimal form, but runs into problems. He now seeks help from his brother Bosky. Nitin is a very sincere learner,
+thus he wants his brother to help him but doesn't want him to completely solve the problem. He goes to his brother Bosky
+and asks him to help him wherever he gets stuck while representing the proper fraction in decimal expansion by telling
+the next digit in the decimal expansion. Though Bosky is a bit busy today with his school project, he doesn't want to
+disappoint his brother. He is familiar with your brilliant programming skills and asks you to create a program to help
+his brother, which can output Rth digit in the decimal expansion for a given proper fraction N/D.
 
 Input:
 Input will contain a number T denoting the number of test cases.
