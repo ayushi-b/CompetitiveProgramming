@@ -23,18 +23,9 @@ map<string, bool> memo;
 void fill_grid(int i, int j, int k) {
 
     string str;
-    //vi arr = {i, j, k};
-    //sort(arr.begin(), arr.end());
-    //str = to_string(arr[0]) + "," + to_string(arr[1]) + "," + to_string(arr[2]) + "," + to_string(grid[i][j][k]);
-    //str = to_string(arr[0]) + "," + to_string(arr[1]) + "," + to_string(arr[2]) + "," + to_string(grid[i][j][k]);
     str = to_string(i) + "," + to_string(j) + "," + to_string(k) + "," + to_string(grid[i][j][k]);
-    //str = to_string(i) + "," + to_string(j) + "," + to_string(k);
 
     if(memo[str]) {
-        //i = arr[0];
-        //j = arr[1];
-        //k = arr[2];
-        //cout << endl << str << endl;
         return;
     }
     else {
@@ -158,25 +149,9 @@ void solve() {
             for(int k = 0; k<=z; ++k)
                 grid[i][j][k] = INT_MAX;
 
-
-    //cout << "done";
-
-    //return;
-
     grid[0][0][0] = 0;
     memo.clear();
     fill_grid(0, 0 , 0);
-
-    //for(int i = 0; i<=x; ++i) {
-    //    for(int j = 0; j<=y; ++j) {
-    //        for(int k = 0; k<=z; ++k) {
-    //            cout << grid[i][j][k] << " ";
-    //        }
-    //        cout << endl;
-    //    }
-    //    cout << endl << endl;
-    //}
-
 
     cout << grid[x][y][z] << endl;
 
@@ -189,9 +164,7 @@ int main() {
     freopen("fi.txt", "r", stdin);freopen("fo.txt", "w", stdout);
 
     time_t t0, t1;
-
     t0 = time(0);
-    //cout << t0 << endl;
 
     ll t;
     cin >> t;
@@ -199,12 +172,6 @@ int main() {
     while(t--) {
 
         cin >> x >> y >> z >> a >> b >> c;
-        cout << x << " ";
-        cout << y << " ";
-        cout << z << " ";
-        cout << a << " ";
-        cout << b << " ";
-        cout << c << " - ";
         solve();
     }
 
