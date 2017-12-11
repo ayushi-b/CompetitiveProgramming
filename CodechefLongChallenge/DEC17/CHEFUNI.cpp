@@ -1,5 +1,5 @@
 //
-// Created by Ayushi on 06/12/17.
+// Created by Ayushi on 11/12/17.
 //
 
 #include<bits/stdc++.h>
@@ -8,152 +8,63 @@ using namespace std;
 #define rep(i,j,n) for(ll (i)=(j);(i)<=(n);++(i))
 #define rrep(i,j,n) for(ll i = n ; (i)>=(j) ;--(i))
 #define vi vector<int>
+#define vll vector<ll>
 #define pii pair<int,int>
 #define vpii vector<pii>
 #define pb push_back
+#define eb emplace_back
+#define debugln(a)   cout<<a<<endl
+#define debug(a)   cout<<a<<" "
+#define maxi(a,b,c)  max(a,max(b,c))
+#define mini(a,b,c)  min(a,min(b,c))
 #define mp make_pair
 #define mod 1000000007
 #define MAX 1000005
 
-int grid[101][101][101];
-int x, y, z, a, b, c;
 
-map<string, bool> memo;
+void solve(vi x, vi cost) {
 
-void fill_grid(int i, int j, int k) {
+    sort(x.begin(), x.end());
 
-    string str;
-    str = to_string(i) + "," + to_string(j) + "," + to_string(k) + "," + to_string(grid[i][j][k]);
+    int ans = 0, case1, case2, case3, case4;
+    int sum2 = x[0] + x[1], sum_all = x[0] + x[1] + x[2];
+    int diff = x[2] - sum2;
 
-    if(memo[str]) {
-        return;
+    case1 = sum_all * cost[0];
+
+    if(x[2] > sum2) {
+        case2 = min(sum2*cost[1] + diff*cost[0],
+                    x[0]*cost[2] + (x[1]-x[0])*cost[1] + (x[2]-x[1])*cost[0]);
     }
     else {
-        memo[str] = true;
-    }
-
-    if(i + 1 <= x) {
-
-        if(j + 1 <= y) {
-
-            if(k + 1 <= z) {
-                grid[i+1][j+1][k+1] = min(grid[i+1][j+1][k+1], grid[i][j][k] + c);
-
-                grid[i+1][j+1][k] = min(grid[i+1][j+1][k], grid[i][j][k] + b);
-                grid[i+1][j][k+1] = min(grid[i+1][j][k+1], grid[i][j][k] + b);
-                grid[i][j+1][k+1] = min(grid[i][j+1][k+1], grid[i][j][k] + b);
-
-                grid[i+1][j][k] = min(grid[i+1][j][k], grid[i][j][k] + a);
-                grid[i][j+1][k] = min(grid[i][j+1][k], grid[i][j][k] + a);
-                grid[i][j][k+1] = min(grid[i][j][k+1], grid[i][j][k] + a);
-
-                fill_grid(i+1, j+1, k+1);
-
-                fill_grid(i+1, j+1, k);
-                fill_grid(i, j+1, k+1);
-                fill_grid(i+1, j, k+1);
-
-                fill_grid(i+1, j, k);
-                fill_grid(i, j+1, k);
-                fill_grid(i, j, k+1);
-
-            }
-            else {
-
-                grid[i+1][j+1][k] = min(grid[i+1][j+1][k], grid[i][j][k] + b);
-
-                grid[i+1][j][k] = min(grid[i+1][j][k], grid[i][j][k] + a);
-                grid[i][j+1][k] = min(grid[i][j+1][k], grid[i][j][k] + a);
-
-
-                fill_grid(i+1, j+1, k);
-
-                fill_grid(i+1, j, k);
-                fill_grid(i, j+1, k);
-
-            }
+        if(sum_all%2) {
+            case2 = min(cost[0] + sum_all/2*cost[1],
+                        cost[2] + (sum_all - 2)/2*cost[1]);
         }
-        else{
-            if(k + 1 <= z) {
-
-                grid[i+1][j][k+1] = min(grid[i+1][j][k+1], grid[i][j][k] + b);
-
-                grid[i+1][j][k] = min(grid[i+1][j][k], grid[i][j][k] + a);
-                grid[i][j][k+1] = min(grid[i][j][k+1], grid[i][j][k] + a);
-
-
-                fill_grid(i+1, j, k+1);
-
-                fill_grid(i+1, j, k);
-                fill_grid(i, j, k+1);
-
-            }
-            else {
-                grid[i+1][j][k] = min(grid[i+1][j][k], grid[i][j][k] + a);
-
-
-                fill_grid(i+1, j, k);
-
-            }
+        else {
+            case2 = sum_all/2 * cost[1];
         }
     }
-    else {
 
-        if(j + 1 <= y) {
+    case3 = min(cost[2]*x[0] + cost[0]*(sum_all - 3*x[0]),
+                x[0]*cost[2] + (x[1]-x[0])*cost[1] + (x[2]-x[1])*cost[0]);
 
-            if(k + 1 <= z) {
+    if(diff < 0) {
+        diff *= -1;
+        int d = sum_all - 3*diff;
+        case4 = diff*cost[2] + d/2*cost[1];
 
-                grid[i][j+1][k+1] = min(grid[i][j+1][k+1], grid[i][j][k] + b);
-
-                grid[i][j+1][k] = min(grid[i][j+1][k], grid[i][j][k] + a);
-                grid[i][j][k+1] = min(grid[i][j][k+1], grid[i][j][k] + a);
-
-
-                fill_grid(i, j+1, k+1);
-
-                fill_grid(i, j+1, k);
-                fill_grid(i, j, k+1);
-
-            }
-            else {
-                grid[i][j+1][k] = min(grid[i][j+1][k], grid[i][j][k] + a);
-
-
-                fill_grid(i, j+1, k);
-
-            }
+        if(d%2) {
+            case4 += cost[0];
         }
-        else{
-            if(k + 1 <= z) {
-                grid[i][j][k+1] = min(grid[i][j][k+1], grid[i][j][k] + a);
 
-
-                fill_grid(i, j, k+1);
-            }
-            else {
-                return;
-            }
-        }
+        case3 = min(case3, case4);
 
     }
 
+    ans = mini(case1, case2, case3);
+    cout << ans << endl;
 
-}
-
-
-void solve() {
-
-    // initialize grid
-    for(int i = 0; i<=x; ++i)
-        for(int j = 0; j<=y; ++j)
-            for(int k = 0; k<=z; ++k)
-                grid[i][j][k] = INT_MAX;
-
-    grid[0][0][0] = 0;
-    memo.clear();
-    fill_grid(0, 0 , 0);
-
-    cout << grid[x][y][z] << endl;
 
 };
 
@@ -171,8 +82,18 @@ int main() {
 
     while(t--) {
 
-        cin >> x >> y >> z >> a >> b >> c;
-        solve();
+        vi x(3), c(3);
+
+        rep(i, 0, 2) {
+            cin >> x[i];
+        }
+
+        rep(i, 0, 2) {
+            cin >> c[i];
+        }
+
+        solve(x, c);
+
     }
 
     t1 = time(0);
