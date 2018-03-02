@@ -1,5 +1,5 @@
 .idea/
 **/.DS_Store
 **/cmake-build-debug
-template.cpp
 CMakeLists.txt
+**MAR18B
